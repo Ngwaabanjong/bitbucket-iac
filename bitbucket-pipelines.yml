@@ -1,0 +1,12 @@
+image: hashicorp/terraform
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Deploy to Production
+          deployment: Production
+          script:
+            - terraform init
+            - terraform plan
+            - terraform apply -auto-approve
