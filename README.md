@@ -23,4 +23,21 @@ pipelines:
             - terraform apply -auto-approve
 ```
 
-## 3 - 
+## 3 - Configure credentials
+- On the repository -> settings -> pipelines
+- On the settings enable pipelines settings
+- On the same pipelines -> environment variables
+
+## Delete resources
+```
+image: hashicorp/terraform
+
+pipelines:
+  custom:
+    destroy:
+      - step:
+          name: Destroy Resources
+          script:
+            - terraform init
+            - terraform destroy -auto-approve
+```
