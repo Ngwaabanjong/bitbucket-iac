@@ -1,0 +1,27 @@
+
+# // deploy = uncomment to apply
+image: hashicorp/terraform
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Deploy to Production
+          deployment: Production
+          script:
+            - terraform init
+            - terraform plan
+            - terraform apply -auto-approve
+
+
+# // destroy = uncomment to apply
+# image: hashicorp/terraform
+
+# pipelines:
+#   custom:
+#     destroy:
+#       - step:
+#           name: Destroy Resources
+#           script:
+#             - terraform init
+#             - terraform destroy -auto-approve
