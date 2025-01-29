@@ -3,11 +3,18 @@ Create EC2 Using Terraform (IAC) Bitbucket CICD
 
 ## 1 - Create Bitbucket
 
+## 2 - Create an IAM user with the following policies below:
+- AmazonEC2FullAccess & AmazonS3FullAccess
+- Create Access keys from the user
 
-## 2 - Create Pipeline Script
-- Create a bitbucket repository
-- Click on deployments
-- On **bitbucket-pipelines.yml** paste the below code.
+## 3. Add Access keys on bitbucket repository
+- On Bitbucket repository -> repository settings -> repository variables at keys as below
+- Name: AWS_ACCESS_KEY_ID Value: {{insert key ID}}
+- Name: AWS_SECRET_ACCESS_KEY Value: {{insert secret key}}
+
+## 4 - Create Pipeline Script
+- Add below code on bitbucket repository with Terraform code.
+- Create a file name **bitbucket-pipelines.yml** paste the below code.
 ```
 image: hashicorp/terraform
 
@@ -23,10 +30,10 @@ pipelines:
             - terraform apply -auto-approve
 ```
 
-## 3 - Configure credentials
-- On the repository -> settings -> pipelines
-- On the settings enable pipelines settings
-- On the same pipelines -> environment variables
+## 3 - Enable pipeline
+- On the repository -> settings -> pipelines.
+- On the settings enable pipelines settings.
+- If it's already enabled your pipeline will run ones code is push/commit.
 
 ## Delete resources
 ```
